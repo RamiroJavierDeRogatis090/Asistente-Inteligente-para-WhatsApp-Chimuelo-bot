@@ -1,0 +1,24 @@
+services:
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: chimuelo-n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./data/n8n:/home/node/.n8n
+    environment:
+      - TZ=America/Argentina/Buenos_Aires
+
+  postgres:
+    image: postgres:16
+    container_name: chimuelo-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: chimuelo
+      POSTGRES_PASSWORD: chimuelo123
+      POSTGRES_DB: chimuelo
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
